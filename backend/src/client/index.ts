@@ -56,15 +56,23 @@ function getOpenRouterClientFromEnv(): OpenAI {
   });
 }
 
+const replacementschema = z.object({
+  replacement: z.string(),
+  original: z.string(),
+  reason: z.string(),
+});
+
 function getInterviewAgent() {
   return new Agent({
     name: "Interview Handler",
     model: ROUTER_MAINMODEL,
     outputType: z.object({
       transformed: z.string(),
-      reason: z.string(),
+      reasons: z.array(replacementschema),
     }),
-    instructions: `You provide assistance with interview text by anonymize personal information in it and output the transformed text as "transformed" key in the final output. The reason for the transformation should be added as key "reason" to the output`,
+    instructions: `You provide assistance with interview text by anonymize personal information in it 
+    and output the transformed text as "transformed" key in the final output. 
+    The reason for any replacement should be added as array "reasons" having for each replacement the "replacement" text, the "original" text and the "reason" for the replacement.  The key "reasons" key is added to the output`,
   });
 }
 

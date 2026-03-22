@@ -54,8 +54,9 @@ export default function Interview_OpenRouter() {
       const { data: answer } = await res.json();
 
       const answerObject = JSON.parse(answer);
+      const reasonsarray = answerObject.reasons;
 
-      const output = `TRANSFORMATION:\n\n${answerObject.transformed}\n\nBEGRÜNDUNG:\n\n${answerObject.reason} `;
+      const output = `TRANSFORMATION:\n\n${answerObject.transformed}\n\nBEGRÜNDUNG:\n\n${JSON.stringify(reasonsarray)} `;
 
       setAiResponse(output);
     } catch (error) {
