@@ -1,0 +1,61 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch --conditions development --env-file=.env src/app.ts",
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node --env-file=.env dist/app.js"
+  },
+  "dependencies": {
+    "@openai/agents": "^0.7.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3",
+    "openai": "^6.8.1",
+    "zod": "^4.00"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.0",
+    "typescript": "^5.9.3"
+  },
+  "imports": {
+    "#db": {
+      "development": "./src/db/index.ts",
+      "default": "./dist/db/index.js"
+    },
+    "#config": {
+      "development": "./src/config/index.ts",
+      "default": "./dist/config/index.js"
+    },
+    "#routes": {
+      "development": "./src/routes/index.ts",
+      "default": "./dist/routes/index.js"
+    },
+    "#controllers": {
+      "development": "./src/controllers/index.ts",
+      "default": "./dist/controllers/index.js"
+    },
+    "#client": {
+      "development": "./src/client/index.ts",
+      "default": "./dist/client/index.js"
+    },
+    "#schemas": {
+      "development": "./src/schemas/index.ts",
+      "default": "./dist/schemas/index.js"
+    },
+    "#models": {
+      "development": "./src/models/index.ts",
+      "default": "./dist/models/index.js"
+    }
+  }
+}
